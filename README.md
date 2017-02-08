@@ -1,5 +1,5 @@
 # d-ealer
-A Docker Healer - Auto Restarting Unhealthy Containers Edit
+A Docker Healer - Auto Restarting Unhealthy Containers
 
 # How To
 
