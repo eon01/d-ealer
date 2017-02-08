@@ -1,0 +1,12 @@
+appdirs==1.4.0
+backports.ssl-match-hostname==3.5.0.1
+configparser==3.5.0
+docker==2.0.2
+docker-pycreds==0.2.1
+ipaddress==1.0.18
+logging==0.4.9.6
+packaging==16.8
+pyparsing==2.1.10
+requests==2.13.0
+six==1.10.0
+websocket-client==0.40.0
