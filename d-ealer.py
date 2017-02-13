@@ -30,6 +30,7 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 
 def dealer(containers, s):
+    label_check = 0
     for container in containers:
         try:
             label_check = container.attrs['Config']['Labels']['com.dealer.activate']
