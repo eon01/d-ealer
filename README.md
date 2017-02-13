@@ -62,9 +62,8 @@ sudo pip install --upgrade pip
 
 
 # ToDo
-- Add the possibility to exclude containers/services from being auto-healed
 - Allow users to choose the timeout and retries number ..etc
 
 
-https://hub.docker.com/r/eon01/d-ealer/
-https://github.com/eon01/d-ealer
+- Docker Hub: https://hub.docker.com/r/eon01/d-ealer/
+- GitHub : https://github.com/eon01/d-ealer

@@ -4,8 +4,6 @@ import traceback
 import ConfigParser
 import time
 
-
-
 # start configuration parser
 parser = ConfigParser.ConfigParser()
 parser.read("d-ealer.conf")
@@ -31,7 +29,6 @@ handler.setFormatter(formatter)
 # add the handlers to the logger
 logger.addHandler(handler)
 
-
 def dealer(containers, s):
     for container in containers:
         try:
@@ -56,15 +53,14 @@ def dealer(containers, s):
     time.sleep(s)
     return
 
-
 if __name__ == "__main__":
     # start docker cli
     client = docker.from_env()
     containers = client.containers.list()
+
     s = 1
 
     # check healthchecks and restart
-
     while True:
         dealer(containers, s)
 
