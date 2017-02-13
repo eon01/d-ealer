@@ -5,6 +5,7 @@ import ConfigParser
 import time
 
 
+
 # start configuration parser
 parser = ConfigParser.ConfigParser()
 parser.read("d-ealer.conf")
@@ -30,23 +31,41 @@ handler.setFormatter(formatter)
 # add the handlers to the logger
 logger.addHandler(handler)
 
-# start docker cli
-client = docker.from_env()
-containers = client.containers.list()
 
-# check healthchecks and restart
-while True:
+def dealer(containers, s):
     for container in containers:
-        try:    
-            healthcheck = container.attrs['State']['Health']['Status']
-            if healthcheck == "unhealthy":
-                    container.restart()
+        try:
+            label_check = container.attrs['Config']['Labels']['com.dealer.activate']
         except KeyError:
-            logger.error('healthcheck disabled on container %s. Passing' % container.name)
             pass
-        except:
-            logger.error('Unkown problem on container %s : %s. Please check Docker logs. Passing' % traceback.format_exc(),container.name)
-            pass
-    time.sleep(1)
+        if label_check == 1:
+    	    try:
+                healthcheck = container.attrs['State']['Health']['Status']
 
-    
+        	if healthcheck == "unhealthy":
+        	    container.restart()
+        	else:
+        	    print healthcheck
+        	    pass
+            except KeyError:
+        	logger.error('healthcheck disabled on container %s. Passing' % container.name)
+        	pass
+            except:
+    	        logger.error('Unkown problem on container %s : %s. Please check Docker logs. Passing' % traceback.format_exc(),container.name)
+    	        pass
+    time.sleep(s)
+    return
+
+
+if __name__ == "__main__":
+    # start docker cli
+    client = docker.from_env()
+    containers = client.containers.list()
+    s = 1
+
+    # check healthchecks and restart
+
+    while True:
+        dealer(containers, s)
+
+
